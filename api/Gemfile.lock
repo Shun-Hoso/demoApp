@@ -66,6 +66,10 @@ GEM
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    graphql (2.0.2)
+    graphql-batch (0.5.1)
+      graphql (>= 1.10, < 3)
+      promise.rb (~> 0.7.2)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
     listen (3.7.1)
@@ -87,6 +91,7 @@ GEM
     nokogiri (1.13.3)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
+    promise.rb (0.7.4)
     puma (4.3.11)
       nio4r (~> 2.0)
     racc (1.6.0)
@@ -149,6 +154,8 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  graphql
+  graphql-batch
   listen (~> 3.2)
   mysql2 (>= 0.4.4)
   puma (~> 4.1)

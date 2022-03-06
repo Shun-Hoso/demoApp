@@ -23,6 +23,7 @@
     "apollo-server": "^3.6.3",
     "babel-jest": "^27.5.1",
     "classnames": "^2.3.1",
+    "deepmerge": "^4.2.2",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^16.3.0",
     "jest": "^27.5.1",
