@@ -24,6 +24,7 @@ services:
     volumes:
       - ./api:/app
     command: rails server -b 0.0.0.0
+    hostname: 'api'
   front: 
     build:
       context: ./front/
@@ -33,6 +34,7 @@ services:
     command: 'yarn dev'
     ports:
       - "8000:3000"
+    hostname: 'front'
 volumes:
   mysql-db:
     driver: local
