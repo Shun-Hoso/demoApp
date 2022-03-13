@@ -1,3 +1,10 @@
+query getPostAll{
+  posts {
+    id
+    title
+  }
+}
+
 query getPost($id: ID!){
   post(id: $id) {
     id

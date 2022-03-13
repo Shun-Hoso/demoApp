@@ -35,12 +35,19 @@ export type Query = {
   __typename?: 'Query';
   /** Find a post by ID */
   post: Post;
+  /** Find All posts */
+  posts: Array<Post>;
 };
 
 
 export type QueryPostArgs = {
   id: Scalars['ID'];
 };
+
+export type GetPostAllQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPostAllQuery = { __typename?: 'Query', posts: Array<{ __typename?: 'Post', id: string, title?: string | null }> };
 
 export type GetPostQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -50,6 +57,41 @@ export type GetPostQueryVariables = Exact<{
 export type GetPostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, title?: string | null } };
 
 
+export const GetPostAllDocument = gql`
+    query getPostAll {
+  posts {
+    id
+    title
+  }
+}
+    `;
+
+/**
+ * __useGetPostAllQuery__
+ *
+ * To run a query within a React component, call `useGetPostAllQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetPostAllQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetPostAllQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetPostAllQuery(baseOptions?: Apollo.QueryHookOptions<GetPostAllQuery, GetPostAllQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetPostAllQuery, GetPostAllQueryVariables>(GetPostAllDocument, options);
+      }
+export function useGetPostAllLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetPostAllQuery, GetPostAllQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetPostAllQuery, GetPostAllQueryVariables>(GetPostAllDocument, options);
+        }
+export type GetPostAllQueryHookResult = ReturnType<typeof useGetPostAllQuery>;
+export type GetPostAllLazyQueryHookResult = ReturnType<typeof useGetPostAllLazyQuery>;
+export type GetPostAllQueryResult = Apollo.QueryResult<GetPostAllQuery, GetPostAllQueryVariables>;
 export const GetPostDocument = gql`
     query getPost($id: ID!) {
   post(id: $id) {
