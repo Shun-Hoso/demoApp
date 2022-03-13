@@ -30,8 +30,8 @@ const Home: FC<Props> = ({posts}) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const apolloClient = initializeApollo('http://api:3000/graphql');
+export const getServerSideProps: GetServerSideProps = async () => {
+  const apolloClient = initializeApollo(process.env.LOCAL_API_URL);
   try {
     const getPostsResponse = await apolloClient.query({
       query: GetPostAllDocument,

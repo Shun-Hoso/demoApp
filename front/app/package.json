@@ -9,7 +9,7 @@
     "lint": "next lint",
     "lint:fix": "eslint --ext .js,jsx,.ts,.tsx --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml dotenv_config_path=../../../.envrc"
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",

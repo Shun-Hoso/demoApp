@@ -32,6 +32,8 @@ services:
     volumes:
       - ./front/app:/usr/src/app
     command: 'yarn dev'
+    environment:
+      LOCAL_API_URL: $LOCAL_API_URL
     ports:
       - "8000:3000"
     hostname: 'front'
