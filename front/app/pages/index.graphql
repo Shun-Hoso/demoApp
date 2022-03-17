@@ -11,3 +11,10 @@ query getPost($id: ID!){
     title
   }
 }
+
+mutation updatePost($id: ID!, $title: String!) {
+  updatePost(post: {id: $id, title: $title}) {
+    id
+    title
+  }
+}

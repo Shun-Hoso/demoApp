@@ -1,8 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { GetServerSideProps } from 'next';
 import { Heading } from '@chakra-ui/react';
 import { initializeApollo } from '../lib/apolloClient';
 import { GetPostAllDocument } from '../graphql/generated';
+import { FlashNotice } from '../components/uiParts/FlashNotice';
+import { CommonButton } from '../components/uiParts/Button/CommonButton';
 
 type Post = {
   id: number;
@@ -16,6 +18,7 @@ type Props = {
 const Home: FC<Props> = ({posts}) => {
   return (
     <div>
+      < FlashNotice />
       <Heading color="red">Hello, Next.js with Chakra UI </Heading>
       <h2>POSTの一覧</h2>
       <table>
@@ -26,6 +29,7 @@ const Home: FC<Props> = ({posts}) => {
           </tr>
         ))}
       </table>
+      <CommonButton text={'更新する'} color={'blue'} mt={5} />
     </div>
   );
 };

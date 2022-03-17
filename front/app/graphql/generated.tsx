@@ -19,8 +19,13 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  /** An example field added by the generator */
-  testField: Scalars['String'];
+  /** Find a post by ID */
+  updatePost: Post;
+};
+
+
+export type MutationUpdatePostArgs = {
+  post: PostInput;
 };
 
 export type Post = {
@@ -29,6 +34,11 @@ export type Post = {
   id: Scalars['ID'];
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['ISO8601DateTime'];
+};
+
+export type PostInput = {
+  id: Scalars['ID'];
+  title: Scalars['String'];
 };
 
 export type Query = {
@@ -55,6 +65,14 @@ export type GetPostQueryVariables = Exact<{
 
 
 export type GetPostQuery = { __typename?: 'Query', post: { __typename?: 'Post', id: string, title?: string | null } };
+
+export type UpdatePostMutationVariables = Exact<{
+  id: Scalars['ID'];
+  title: Scalars['String'];
+}>;
+
+
+export type UpdatePostMutation = { __typename?: 'Mutation', updatePost: { __typename?: 'Post', id: string, title?: string | null } };
 
 
 export const GetPostAllDocument = gql`
@@ -128,3 +146,38 @@ export function useGetPostLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Ge
 export type GetPostQueryHookResult = ReturnType<typeof useGetPostQuery>;
 export type GetPostLazyQueryHookResult = ReturnType<typeof useGetPostLazyQuery>;
 export type GetPostQueryResult = Apollo.QueryResult<GetPostQuery, GetPostQueryVariables>;
+export const UpdatePostDocument = gql`
+    mutation updatePost($id: ID!, $title: String!) {
+  updatePost(post: {id: $id, title: $title}) {
+    id
+    title
+  }
+}
+    `;
+export type UpdatePostMutationFn = Apollo.MutationFunction<UpdatePostMutation, UpdatePostMutationVariables>;
+
+/**
+ * __useUpdatePostMutation__
+ *
+ * To run a mutation, you first call `useUpdatePostMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdatePostMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updatePostMutation, { data, loading, error }] = useUpdatePostMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useUpdatePostMutation(baseOptions?: Apollo.MutationHookOptions<UpdatePostMutation, UpdatePostMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdatePostMutation, UpdatePostMutationVariables>(UpdatePostDocument, options);
+      }
+export type UpdatePostMutationHookResult = ReturnType<typeof useUpdatePostMutation>;
+export type UpdatePostMutationResult = Apollo.MutationResult<UpdatePostMutation>;
+export type UpdatePostMutationOptions = Apollo.BaseMutationOptions<UpdatePostMutation, UpdatePostMutationVariables>;
